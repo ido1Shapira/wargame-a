@@ -2,10 +2,12 @@
 
 #include "Soldier.hpp"
 
+using namespace std;
+
 class FootCommander : public Soldier {
 
 public:
-        FootCommander(int pn): Soldier(pn, 150, 20) {}
+        FootCommander(int pn): Soldier(pn, 150, -20) {}
 
-        void attack();
+        void attack(WarGame::Board& b, pair<int,int> location);        
 };

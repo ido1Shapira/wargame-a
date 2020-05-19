@@ -2,10 +2,12 @@
 
 #include "Soldier.hpp"
 
+using namespace std;
+
 class Sniper : public Soldier {
 
 public:
         Sniper(int pn): Soldier(pn, 100, 50) {}
 
-        void attack();
+        void attack(vector<vector<Soldier*>>& b);
 };
