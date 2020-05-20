@@ -1,5 +1,3 @@
 #include "Paramedic.hpp"
 
-void Paramedic::attack(){
-        
-}
+        void attack(vector<vector<Soldier*>> &b, pair<int,int> location){}      

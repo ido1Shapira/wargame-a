@@ -9,5 +9,5 @@ class FootSoldier : public Soldier {
 public:
         FootSoldier(int pn): Soldier(pn, 100, -10) {}
 
-        void attack(WarGame::Board& b, pair<int,int> location);
+        void attack(vector<vector<Soldier*>> &b, pair<int,int> location);
 };

@@ -1,13 +1,13 @@
 #include "Board.hpp"
 #include "FootSoldier.hpp"
 
-void FootSoldier::attack(WarGame::Board& bor, pair<int,int> location){
-        int row = bor.get_board().size();
-        int col = bor.get_board()[0].size();
+void FootSoldier::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
+        int row = b.size();
+        int col = b[0].size();
         pair<double, Soldier*> toAttack =make_pair(distance(0, 0, row-1, col-1) + 1, nullptr);
         for(int i= 0; i<row; ++i){
                 for(int j= 0; j<col; ++j){
-                        Soldier* s = bor[{i, j}];
+                        Soldier* s = b[i][j];
                         if(s != nullptr && s->get_player_number() != player_number){
                                 double d = distance(location.first, location.second, i, j);
                                 if (d < toAttack.first) {

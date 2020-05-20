@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "Board.hpp"
 #include <math.h>
-
+using namespace std;
 class Soldier {
         
 protected:
@@ -15,7 +15,7 @@ protected:
 
 public:
         Soldier(uint p, uint h, int d) : player_number(p), health(h), damage(d) { }
-        virtual void attack(WarGame::Board& b, pair<int,int> location) = 0;
+        virtual void attack (vector<vector<Soldier*>> &b, pair<int,int> location) = 0;
         uint get_player_number() { return player_number;}
         uint get_health() { return health;}
         void set_health(uint h) { health = h;}

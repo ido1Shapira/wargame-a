@@ -35,7 +35,8 @@ namespace WarGame {
 		if(target.first >= board.size() || target.first < 0 || target.second >= board.size() || target.second < 0) 
 			throw invalid_argument("Outside of the board");	(*this)[source] = nullptr;
 		(*this)[target] = s;
-		s->attack(*this, target);
+
+		s->attack(board, target);
     }
 
     bool Board::has_soldiers(uint player_number) const {
