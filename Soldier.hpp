@@ -23,6 +23,6 @@ public:
         virtual void attack (std::vector<std::vector<Soldier*>> &b, pair<int,int> location) = 0;
         uint get_player_number() { return player_number;}
         uint get_health() { return health;}
-        void set_health(uint h) { health = h;}
+        void set_health(uint h) { health = min(h,max_health);}
         uint get_damage() { return damage;}
 };

@@ -1,5 +1,41 @@
 #include "ParamedicCommander.hpp"
+#include "Paramedic.hpp"
 
 void ParamedicCommander::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
+    int i=location.first;
+    int j= location.second;
+    
+    if( i>0 && b[i-1][j] != nullptr){
+        if(b[i-1][j]->get_player_number()== player_number ) 
+            b[i-1][j]->set_health(b[i-1][j]->get_health()+ damage);
+    }
+    
+    if( j<b[0].size()-1 && b[i][j+1] != nullptr){
+        if(b[i][j+1]->get_player_number()== player_number ) 
+            b[i][j+1]->set_health(b[i][j+1]->get_health()+ damage);
+    }
+   if(j>0 && b[i][j-1] != nullptr){
+       if(b[i][j-1]->get_player_number()== player_number ) 
+            b[i][j-1]->set_health(b[i][j-1]->get_health()+ damage);
+    }
+    if(i<b[0].size() && b[i+1][j] != nullptr){
+        if(b[i+1][j]->get_player_number()== player_number ) 
+            b[i+1][j]->set_health(b[i+1][j]->get_health()+ damage);
+    }
+    
+    int row = b.size();
+    int col = b[0].size();
+    for(int i= 0; i<row; ++i){
+        for(int j= 0; j<col; ++j){
+            Soldier* s = b[i][j];
+            if(s != nullptr) {        
+                if(s->get_player_number() == player_number){
+                    if(Paramedic* ps=dynamic_cast<Paramedic*>(s)){
+				    	ps->attack(b, {i,j});
+					}
+            	}
+            }
+		}
+	}
 
 }        
