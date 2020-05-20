@@ -7,5 +7,5 @@ class ParamedicCommander : public Soldier {
 public:
         ParamedicCommander(int pn): Soldier(pn, 200, 100) {}
 
-        void attack();
+        void attack(std::vector<std::vector<Soldier*>> &b, pair<int,int> location);
 };

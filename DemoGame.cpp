@@ -11,6 +11,8 @@
 #include "FootSoldier.hpp"
 #include "FootCommander.hpp"
 
+#include <iostream>
+
 #include <cassert>
 
 namespace WarGame {
@@ -29,20 +31,24 @@ namespace WarGame {
 			board[{7,3}] = new FootCommander(2);
 			board[{7,5}] = new FootSoldier(2);
 			assert(board.has_soldiers(2));
-
+			std::cout<< "1, 2 has soldiers"<<endl;
 			// In your game, you can put more soldier types, such as the sniper and the paramedic types.
 		}
 
 		uint DemoGame::play() {
+			std::cout<< "player 1 turn: moving soldier "<<endl;
 			board.move(1, {0,1}, Board::MoveDIR::Up);      // FootSoldier of player 1 moves forward and attacks.
 			if (!board.has_soldiers(2)) return 1;
 
+			std::cout<< "player 2 turn: moving soldier "<<endl;
 			board.move(2, {7,1}, Board::MoveDIR::Down);    // FootSoldier of player 2 moves forward and attacks.
 			if (!board.has_soldiers(1)) return 2;
 
+			std::cout<< "player 1 turn: moving commander"<<endl;
 			board.move(1, {0,3}, Board::MoveDIR::Up);      // FootCommander of player 1 moves forward, and all soldiers of player 1 attack.
 			if (!board.has_soldiers(2)) return 1;
 
+			std::cout<< "player 2 turn: moving commander "<<endl;
 			board.move(2, {7,3}, Board::MoveDIR::Left);    // FootCommander of player 2 moves left, and all soldiers of player 2 attack.
 			if (!board.has_soldiers(1)) return 2;
 

@@ -1,5 +1,5 @@
 #include "Board.hpp"
-
+#include <iostream>
 using namespace std;
 
 namespace WarGame {
@@ -35,7 +35,7 @@ namespace WarGame {
 		if(target.first >= board.size() || target.first < 0 || target.second >= board.size() || target.second < 0) 
 			throw invalid_argument("Outside of the board");	(*this)[source] = nullptr;
 		(*this)[target] = s;
-
+		std::cout<< "my target is (" << target.first << "," << target.second << ")" << endl;
 		s->attack(board, target);
     }
 
