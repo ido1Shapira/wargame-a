@@ -1,113 +1,141 @@
 #include "doctest.h"
-#include "Soldier.hpp"
 #include "Board.hpp"
-#include "FootSoldier.hpp"
-#include "FootCommander.hpp"
-#include "Sniper.hpp"
-#include "SniperCommander.hpp"
-#include <string>
-using namespace std;
-//using namespace WarGame;
 
+using namespace WarGame;
 
-
-namespace WarGame {
+TEST_CASE("CHECK Soldier Creation")
+{
+	Board b(4,4);
+	b[{0,1}] = new Soldier(1);
+	CHECK(b[{0,1}]!=nullptr);
+	
+	//can add here CHECK for any soldier type
 	
 
-   Board b(20,20);
-   
+	delete b[{0,1}];
+}
 
+TEST_CASE("CHECK Soldier Movement")
+{
+	Board b(4,4);
+	b[{0,1}] = new Soldier(1);
+	
+	//move up
+	b.move(1,{0,1},Board::MoveDIR::Up);
+	CHECK(b[{1,1}]!=nullptr);
+	
+	delete b[{1,1}];
+	//can add here CHECK for all directions
+}
 
-TEST_CASE("Test replacement of p, f and b") {
+TEST_CASE("CHECK Soldier Attacks - NOT REALLY CUZ WE ARE NOT CHECKINH HEALTH POINTS")
+{
+	Board b(4,4);
+	b[{0,1}] = new Soldier(1);
+	
+	//creating enemy
+	b[{3,1}] = new Soldier(2);
+	CHECK(b[{3,1}]!=nullptr);
+	
+	//attacking
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
 
-
-   CHECK(!b.has_soldiers(1));
-   CHECK(!b.has_soldiers(2));
-   for (int i = 0; i < 20; i++) {
-     
-     b[{5,i}] = new FootSoldier(1);
-   //   CHECK_NOTHROW( b[{0,i}] = new FootSoldier(1));
-   CHECK(true);
-   }
-   CHECK(b.has_soldiers(1));
-   CHECK(!b.has_soldiers(2));
-   for (int i = 0; i < 20; i++) {
-     
-     b[{15,i}] = new FootSoldier(2);
-   //   CHECK_NOTHROW( b[{0,i}] = new FootSoldier(1));
-   CHECK(true);
-   }
-   CHECK(b.has_soldiers(1));
-   CHECK(b.has_soldiers(2));
-
-   for (int i = 0; i < 20; i++) {
-     b[{0,i}] = new FootSoldier(1);
-   //   CHECK_NOTHROW( b[{0,i}] = new FootSoldier(1));
-   CHECK(true);
-   }
-   
-
-   for (int i = 0; i < 20; i++) {
-     b[{19,i}] = new FootCommander(2);
-   //  b[{16,i}] = new SniperCommander(2);
-   //   CHECK_NOTHROW( b[{0,i}] = new FootSoldier(1));
-   CHECK(true);
-   }
-  // printf("IM ok\n");
-  // CHECK_NOTHROW(b.move(1, {0,15}, Board::MoveDIR::Up));
-   for (int i = 0; i < 15; i++)
-   {
-    //  printf("%d\n", i);
-      if(b.has_soldiers(2) &&b.has_soldiers(1)){
-        CHECK_NOTHROW(b.move(1, {0,i}, Board::MoveDIR::Up));
-
-        CHECK_NOTHROW(b.move(2, {15,i}, Board::MoveDIR::Down));
-      }
-   }
-   
-   /*
- //  for (int  i = 0; i < 20; i++)
-  // {
-    //  printf("%d\n", i);
- //     if(b[{0,i}]!=nullptr){
- //        printf("%d and not null", i);
- //       CHECK_NOTHROW(b.move(1, {0,i}, Board::MoveDIR::Up));
-      }
-      else
-      {
-         CHECK_THROWS(b.move(1, {0,i}, Board::MoveDIR::Up));
-      }
-      printf("%d\n", i);
-      //}
-      if(b[{18,i}]!=nullptr)
-         CHECK_NOTHROW(b.move(2, {18,i}, Board::MoveDIR::Down));
-      else
-      {
-         CHECK_THROWS(b.move(2, {18,i}, Board::MoveDIR::Down));
-      }
-         
-   }
-   */
-   
-
+	delete b[{1,1}];
 
 }
 
+TEST_CASE("CHECK Enemy Killed")
+{
+	Board b(4,4);
+	b[{0,1}] = new Soldier(1);
+	
+	//creating enemy
+	b[{3,1}] = new Soldier(2);
+	
+	//attacking
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	
+	//finish attack
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	
+	CHECK(b[{3,1}]!=nullptr);
+
+	delete b[{1,1}];
 }
 
+TEST_CASE("CHECK Player1 Wone")
+{
+	Board b(4,4);
+	b[{0,1}] = new Soldier(1);
+	
+	//creating enemy
+	b[{3,1}] = new Soldier(2);
+	
+	//attacking
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	
+	//finish attack
+	b.move(1,{1,1}, Board::MoveDIR::Down);
+	b.move(1,{0,1}, Board::MoveDIR::Up);
+	
+	
+	CHECK(!b.has_soldiers(2));
 
+	delete b[{1,1}];
+}
 
+TEST_CASE("Board Edge Exceptions")
+{
+	Board b(4,4);
+        b[{0,1}] = new Soldier(1);
 
+	CHECK_THROWS(b.move(1,{0,1}, Board::MoveDIR::Down));
+	
+	//check other edgeds....
+	
+	delete b[{0,1}];
+}
 
+TEST_CASE("Other Exceptions")
+{
+	Board b(4,4);
+        b[{0,1}] = new Soldier(1);
 
+	//creating enemy
+	b[{1,1}] = new Soldier(2);
+	CHECK(b[{1,1}]!=nullptr);
+	
+	//stepping on other soldier
+    	CHECK_THROWS(b.move(1,{0,1}, Board::MoveDIR::Up));
+	
+	//choosing wrong soldier(soldier belong to other player)
+	CHECK_THROWS(b.move(2,{0,1}, Board::MoveDIR::Down));
+	
+	//choosing place with no soldier
+	CHECK_THROWS(b.move(2,{3,1}, Board::MoveDIR::Down));
 
-
-
-// Id of collaborators 208825539 207950577
-
-
-   
-  // Board b(20,20);
-
-   // CHECK(find(text, "haffy") == string("happy"));
-//}
+	delete b[{1,1}];
+	delete b[{0,1}];
+}
