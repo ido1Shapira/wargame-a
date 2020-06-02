@@ -16,8 +16,12 @@ void Sniper::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
             }
         }
     }
-    
-	int new_health = toAttack.second->get_health() + damage;
-    if(new_health <= 0) { delete toAttack.second; toAttack.second = nullptr;}
-    else { toAttack.second->set_health(new_health); }
+    if( toAttack.second != nullptr) {
+                int new_health = toAttack.second->get_health() + damage;
+                if(new_health <= 0) { delete toAttack.second; toAttack.second = nullptr;}
+                else { toAttack.second->set_health(new_health); }
+    }
+    else {
+            printf("There is no one to attack!\n");
+    }
 }        

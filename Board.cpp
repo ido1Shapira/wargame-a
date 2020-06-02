@@ -34,7 +34,11 @@ namespace WarGame {
 		}
 		if(target.first >= board.size() || target.first < 0 || target.second >= board.size() || target.second < 0) 
 			throw invalid_argument("Outside of the board");	(*this)[source] = nullptr;
+		if((*this)[target] != nullptr) {
+			throw runtime_error("stepping on other soldier!\n");
+		}
 		(*this)[target] = s;
+		(*this)[source] = nullptr;
 		std::cout<< "my target is (" << target.first << "," << target.second << ")" << endl;
 		s->attack(board, target);
     }

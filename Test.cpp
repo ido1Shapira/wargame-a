@@ -1,12 +1,13 @@
 #include "doctest.h"
 #include "Board.hpp"
+#include "FootSoldier.hpp"
 
 using namespace WarGame;
 
 TEST_CASE("CHECK Soldier Creation")
 {
 	Board b(4,4);
-	b[{0,1}] = new Soldier(1);
+	b[{0,1}] = new FootSoldier(1);
 	CHECK(b[{0,1}]!=nullptr);
 	
 	//can add here CHECK for any soldier type
@@ -18,8 +19,7 @@ TEST_CASE("CHECK Soldier Creation")
 TEST_CASE("CHECK Soldier Movement")
 {
 	Board b(4,4);
-	b[{0,1}] = new Soldier(1);
-	
+	b[{0,1}] = new FootSoldier(1);
 	//move up
 	b.move(1,{0,1},Board::MoveDIR::Up);
 	CHECK(b[{1,1}]!=nullptr);
@@ -31,10 +31,10 @@ TEST_CASE("CHECK Soldier Movement")
 TEST_CASE("CHECK Soldier Attacks - NOT REALLY CUZ WE ARE NOT CHECKINH HEALTH POINTS")
 {
 	Board b(4,4);
-	b[{0,1}] = new Soldier(1);
+	b[{1,1}] = new FootSoldier(1);
 	
 	//creating enemy
-	b[{3,1}] = new Soldier(2);
+	b[{3,1}] = new FootSoldier(2);
 	CHECK(b[{3,1}]!=nullptr);
 	
 	//attacking
@@ -54,10 +54,10 @@ TEST_CASE("CHECK Soldier Attacks - NOT REALLY CUZ WE ARE NOT CHECKINH HEALTH POI
 TEST_CASE("CHECK Enemy Killed")
 {
 	Board b(4,4);
-	b[{0,1}] = new Soldier(1);
+	b[{1,1}] = new FootSoldier(1);
 	
 	//creating enemy
-	b[{3,1}] = new Soldier(2);
+	b[{3,1}] = new FootSoldier(2);
 	
 	//attacking
 	b.move(1,{1,1}, Board::MoveDIR::Down);
@@ -81,10 +81,10 @@ TEST_CASE("CHECK Enemy Killed")
 TEST_CASE("CHECK Player1 Wone")
 {
 	Board b(4,4);
-	b[{0,1}] = new Soldier(1);
+	b[{1,1}] = new FootSoldier(1);
 	
 	//creating enemy
-	b[{3,1}] = new Soldier(2);
+	b[{3,1}] = new FootSoldier(2);
 	
 	//attacking
 	b.move(1,{1,1}, Board::MoveDIR::Down);
@@ -109,7 +109,7 @@ TEST_CASE("CHECK Player1 Wone")
 TEST_CASE("Board Edge Exceptions")
 {
 	Board b(4,4);
-        b[{0,1}] = new Soldier(1);
+        b[{0,1}] = new FootSoldier(1);
 
 	CHECK_THROWS(b.move(1,{0,1}, Board::MoveDIR::Down));
 	
@@ -121,10 +121,10 @@ TEST_CASE("Board Edge Exceptions")
 TEST_CASE("Other Exceptions")
 {
 	Board b(4,4);
-        b[{0,1}] = new Soldier(1);
+        b[{0,1}] = new FootSoldier(1);
 
 	//creating enemy
-	b[{1,1}] = new Soldier(2);
+	b[{1,1}] = new FootSoldier(2);
 	CHECK(b[{1,1}]!=nullptr);
 	
 	//stepping on other soldier

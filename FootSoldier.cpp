@@ -4,6 +4,7 @@
 void FootSoldier::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
         int row = b.size();
         int col = b[0].size();
+        // printf("start search someone to attack, row: %d, col: %d\n", row, col);
         pair<double, Soldier*> toAttack =make_pair(distance(0, 0, row-1, col-1) + 1, nullptr);
         for(int i= 0; i<row; ++i){
                 for(int j= 0; j<col; ++j){
@@ -17,7 +18,13 @@ void FootSoldier::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
                         }
                 }
         }
-        int new_health = toAttack.second->get_health() + damage;
-        if(new_health <= 0) { delete toAttack.second; toAttack.second = nullptr;}
-        else { toAttack.second->set_health(new_health); }
+        // printf("toAttack: first: %f, second: %p\n", toAttack.first, toAttack.second);
+        if( toAttack.second != nullptr) {
+                int new_health = toAttack.second->get_health() + damage;
+                if(new_health <= 0) { delete toAttack.second; toAttack.second = nullptr;}
+                else { toAttack.second->set_health(new_health); }
+        }
+        else {
+                printf("There is no one to attack!\n");
+        }
 }

@@ -23,6 +23,39 @@ void ParamedicCommander::attack(vector<vector<Soldier*>> &b, pair<int,int> locat
             b[i+1][j]->set_health(b[i+1][j]->get_max_health());
     }
     
+    try{
+        if(b[i+1][j+1] != nullptr){
+        if(b[i+1][j+1]->get_player_number()== player_number ) 
+            b[i+1][j+1]->set_health(b[i+1][j+1]->get_max_health());
+            }
+    }
+    catch(exception &e){}
+
+    try{
+        if(b[i-1][j-1] != nullptr){
+        if(b[i-1][j-1]->get_player_number()== player_number ) 
+            b[i-1][j-1]->set_health(b[i-1][j-1]->get_max_health());
+            }
+    }
+    catch(exception &e){}
+
+    try{
+        if(b[i+1][j-1] != nullptr){
+        if(b[i+1][j-1]->get_player_number()== player_number ) 
+            b[i+1][j-1]->set_health(b[i+1][j-1]->get_max_health());
+            }
+    }
+    catch(exception &e){}
+
+    try{
+        if(b[i-1][j+1] != nullptr){
+        if(b[i-1][j+1]->get_player_number()== player_number ) 
+            b[i-1][j+1]->set_health(b[i-1][j+1]->get_max_health());
+            }
+    }
+    catch(exception &e){}
+
+
     int row = b.size();
     int col = b[0].size();
     for(int i= 0; i<row; ++i){
