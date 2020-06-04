@@ -47,17 +47,17 @@ namespace WarGame {
 		
 		(*this)[target] = s;
 		(*this)[source] = nullptr;
-		std::cout<< "my target is (" << target.first << "," << target.second << ")" << endl;
+	//	std::cout<< "my target is (" << target.first << "," << target.second << ")" << endl;
 		// if((*this)[{6,0}] != nullptr){
                 // 	printf("from move 2: Board[6,0]: player_number: %d, player_health: %d, max_health: %d, damage: %d\n", (*this)[{6,0}]->get_player_number(), (*this)[{6,0}]->get_health(), (*this)[{6,0}]->get_max_health(), (*this)[{6,0}]->get_damage());
         	// }
-		printf("finish to move!!\n");
+	//	printf("finish to move!!\n");
 		s->attack(board, target);
-		printf("finish to attack!!\n");
+	//	printf("finish to attack!!\n");
     }
 
     bool Board::has_soldiers(int player_number) const {
-	this->print_board();
+	//this->print_board();
 	for(int i= 0; i< board.size(); ++i){
 		for(int j=0; j< board[i].size(); ++j) {
 			Soldier* s = (*this)[{i, j}];

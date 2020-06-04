@@ -15,13 +15,13 @@ void FootSoldier::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
                         Soldier* s = b[i][j];
                         if(s != nullptr && s->get_player_number() != player_number){
                                 double d = distance(location.first, location.second, i, j);
-                                if (d < toAttack.first) {
+                                if (d <= toAttack.first) {
                                         toAttack.first = d;
                                         toAttack.second = s;
                                         toAttack_index.first = i;
                                         toAttack_index.second = j;
-                                        printf("i: %d, j: %d\n", i,j);
-                                        printf("toAttack 1: first: %f, second: %p, player_number: %d, player_health: %d, max_health: %d, damage: %d\n", toAttack.first, toAttack.second, toAttack.second->get_player_number(), toAttack.second->get_health(), toAttack.second->get_max_health(), toAttack.second->get_damage());
+                                    //    printf("i: %d, j: %d\n", i,j);
+                                     //   printf("toAttack 1: first: %f, second: %p, player_number: %d, player_health: %d, max_health: %d, damage: %d\n", toAttack.first, toAttack.second, toAttack.second->get_player_number(), toAttack.second->get_health(), toAttack.second->get_max_health(), toAttack.second->get_damage());
                                 }
                         }
                 }
@@ -29,21 +29,22 @@ void FootSoldier::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
         if(toAttack.second->get_player_number() > 2) {
                 toAttack.second = nullptr;
         }
-        printf("toAttack: first 2: %f, second: %p, player_number: %d, player_health: %d, max_health: %d, damage: %d\n", toAttack.first, toAttack.second, toAttack.second->get_player_number(), toAttack.second->get_health(), toAttack.second->get_max_health(), toAttack.second->get_damage());
+      //  printf("toAttack: first 2: %f, second: %p, player_number: %d, player_health: %d, max_health: %d, damage: %d\n", toAttack.first, toAttack.second, toAttack.second->get_player_number(), toAttack.second->get_health(), toAttack.second->get_max_health(), toAttack.second->get_damage());
         // printf("type: %s\n", typeid(*(toAttack.second)).name());
         if(toAttack.second != nullptr) {
-                printf("1\n");
+           //     printf("1\n");
                 int new_health = toAttack.second->get_health() + damage;
-                printf("2\nnew_health: %d\n", new_health);
+            //    printf("2\n new_health: %d\n", new_health);
                 if(new_health <= 0) {
-                        printf("2.5\n");
-                        delete toAttack.second;
+             //           printf("2.5\n");
                         b[toAttack_index.first][toAttack_index.second] = nullptr;
-                        printf("3\n");
+              //          printf("%p", b[toAttack_index.first][toAttack_index.second]);
+                       // delete toAttack.second;
+               //         printf("3\n");
                 }
                 else { 
                         toAttack.second->set_health(new_health); 
-                        printf("4\n");
+                 //       printf("4\n");
                 }
         }
         else {
