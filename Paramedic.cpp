@@ -21,6 +21,7 @@ void Paramedic::attack(vector<vector<Soldier*>> &b, pair<int,int> location){
         if(b[i+1][j]->get_player_number()== player_number ) 
             b[i+1][j]->set_health(b[i+1][j]->get_max_health());
     }
+    
     // try{
     //     if(b[i+1][j+1] != nullptr){
     //     if(b[i+1][j+1]->get_player_number()== player_number ) 

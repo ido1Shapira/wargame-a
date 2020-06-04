@@ -57,7 +57,6 @@ namespace WarGame {
     }
 
     bool Board::has_soldiers(int player_number) const {
-	//this->print_board();
 	for(int i= 0; i< board.size(); ++i){
 		for(int j=0; j< board[i].size(); ++j) {
 			Soldier* s = (*this)[{i, j}];
@@ -78,7 +77,7 @@ namespace WarGame {
             printf("  %d:%d  ",(*this)[{i,j}]->get_player_number(), (*this)[{i,j}]->get_health());
           }
           else {
-            printf("  0:0  ");
+            printf("  ----  ");
           }
         }
         printf("\n");
